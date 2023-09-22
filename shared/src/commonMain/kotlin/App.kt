@@ -42,4 +42,7 @@ fun App() {
     }
 }
 
+suspend fun getImages() {
+    // TODO: Start at 16:35 mark
+}
 expect fun getPlatformName(): String
