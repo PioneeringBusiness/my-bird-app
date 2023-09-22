@@ -49,7 +49,6 @@ class BirdsViewModel: ViewModel() {
 		val images = httpClient
 			.get("https://sebi.io/demo-image-api/pictures.json")
 			.body<List<BirdImage>>()
-
 		return images
 
 	}
