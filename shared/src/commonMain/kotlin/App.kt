@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -71,7 +72,11 @@ fun BirdsPage(viewModel: BirdsViewModel) {
                     onClick = {
                         viewModel.selectCategory(cateGory)
                     },
-                    modifier = Modifier.aspectRatio(1.0f).fillMaxSize().weight(1.0f)
+                    modifier = Modifier.aspectRatio(1.0f).fillMaxSize().weight(1.0f),
+                    elevation = ButtonDefaults.elevation(
+                        defaultElevation = 0.dp,
+                        focusedElevation = 0.dp
+                    )
                 ) {
                     Text(cateGory)
                 }
