@@ -1,3 +1,4 @@
+import androidx.compose.foundation.Image
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -17,8 +18,12 @@ import model.BirdImage
  */
 
 data class BirdsUiState(
-	val images: List<BirdImage> = emptyList()
-)
+	val images: List<BirdImage> = emptyList(),
+	val selectedCategory: String? = null
+) {
+	val categories :Set<String> = images.map { it.category }.toSet()
+	val selectedImages : List<BirdImage> = images.filter { it.category == selectedCategory }
+}
 class BirdsViewModel: ViewModel() {
 	private val _uiState :MutableStateFlow<BirdsUiState> = MutableStateFlow<BirdsUiState>(BirdsUiState())
 	val uiState = _uiState.asStateFlow()
@@ -37,6 +42,9 @@ class BirdsViewModel: ViewModel() {
 		httpClient.close()
 	}
 
+	fun selectCategory(category: String) {
+		_uiState.update { it.copy(selectedCategory = category) }
+	}
 	fun updateImages() {
 		viewModelScope.launch {
 			val images = getImages()
